@@ -34,7 +34,7 @@ def monthly_rainy_days(dataframe, month):
 
 
     first_day = (date(2020, month, 1) - date(2020, 1, 1)).days
-    last_day = (date(2020, month+1, 1) - date(2020, 1, 1)).days - 1
+    last_day = (date(2020, month+1, 1) - date(2020, 1, 1)).days 
 
     rainy_days = np.count_nonzero(total_rain[first_day:last_day])
     rain_amount = total_rain[first_day:last_day].sum()
@@ -47,13 +47,13 @@ def monthly_snowy_days(dataframe, month):
     total_snow = weather_data[num_cols_snow]
 
     first_day = (date(2020, month, 1) - date(2020, 1, 1)).days
-    last_day = (date(2020, month+1, 1) - date(2020, 1, 1)).days - 1
+    last_day = (date(2020, month+1, 1) - date(2020, 1, 1)).days 
 
     snowy_days = np.count_nonzero(total_snow[first_day:last_day])
     snow_amount = total_snow[first_day:last_day].sum()
     return snowy_days, snow_amount
 
 
-print(monthly_mean_temp(weather_data, 1))
+#print(monthly_mean_temp(weather_data, 1))
 #print(yearly_mean_temp(weather_data))
-#print(monthly_snowy_days(weather_data, 1))
+print(monthly_rainy_days(weather_data, 1))

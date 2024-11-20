@@ -3,7 +3,8 @@ import pandas as pd
 import pytest
 
 
-weather_data = pd.read_csv('en_climate_daily_NL_8403505_2020_P1D.csv', usecols=range(4,31), index_col='Date/Time')
+weather_data = pd.read_csv('en_climate_daily_NL_8403505_2020_P1D.csv',
+                            usecols=range(4,31), index_col='Date/Time')
 
 @pytest.mark.parametrize("dataframe, month, expected",
                          [(weather_data, 1, -4.706452),
@@ -14,9 +15,16 @@ def test_monthly_mean_temp(dataframe, month, expected):
     observed = float(weather_analysis.monthly_mean_temp(dataframe, month))
     assert abs(observed-expected) < 1e-5
 
-
+@pytest.mark.parametrize("dataframe, expected",
+                         [(weather_data, [-4.706452, -4.246429, -3.083333, 1.253333, 6.645161, 13.826667,
+                                          14.01, 17.370968, 14.748276, 8.664516, 3.434483, 2.022581]),
+                          ])
 def test_yearly_mean_temp(dataframe, expected):
-    return NotImplementedError
+    observed = weather_analysis.yearly_mean_temp(dataframe)
+    print(observed)
+    for i in range(len(observed)):
+        observed[i] = float(observed[i])
+        assert abs(observed[i]-expected[i]) < 1e-5
     
 
 def test_monthly_rainy_days(dataframe, month, expected):

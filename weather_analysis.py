@@ -10,7 +10,7 @@ def monthly_mean_temp(dataframe, month):
     weather_data[num_cols_mean_temp] = weather_data[num_cols_mean_temp].astype(float) 
     mean_temp = weather_data[num_cols_mean_temp]
     first_day = (date(2020, month, 1) - date(2020, 1, 1)).days
-    last_day = (date(2020, month+1, 1) - date(2020, 1, 1)).days - 1
+    last_day = (date(2020, month+1, 1) - date(2020, 1, 1)).days 
     
     print("first day is", first_day)
     print("last day is", last_day)
@@ -54,6 +54,6 @@ def monthly_snowy_days(dataframe, month):
     return snowy_days, snow_amount
 
 
-#print(monthly_mean_temp(weather_data, 1))
+print(monthly_mean_temp(weather_data, 1))
 #print(yearly_mean_temp(weather_data))
-print(monthly_snowy_days(weather_data, 1))
+#print(monthly_snowy_days(weather_data, 1))

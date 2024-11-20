@@ -56,4 +56,7 @@ def monthly_snowy_days(dataframe, month):
 
 #print(monthly_mean_temp(weather_data, 1))
 #print(yearly_mean_temp(weather_data))
-print(monthly_rainy_days(weather_data, 1))
+daysofrain, amountofrain = monthly_rainy_days(weather_data, 1)
+print(amountofrain)
+print(format(float(amountofrain), '.2f'))
+

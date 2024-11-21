@@ -2,5 +2,11 @@
 *.sty
 *.log
 *.synctex.gz
+*.aux
+*.nav
+*.snm
+*.out
+CMSC_6950_Project.pdf
+CMSC_6950_Presentation.pdf
 CMSC_6950_Project.tex
 CMSC_6950_Presentation.tex

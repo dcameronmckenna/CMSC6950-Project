@@ -53,9 +53,11 @@ def monthly_snowy_days(dataframe, month):
     snow_amount = total_snow[first_day:last_day].sum()
     return snowy_days, snow_amount
 
-def above_mean_quantile(dataframe, column, mean):
-    col_float = weather_data[column].astype(float)
-    monthly_data = col_float[0:31]
+def above_mean_quantile(dataframe, column, mean, month):
+    first_day = (date(2020, month, 1) - date(2020, 1, 1)).days
+    last_day = (date(2020, month+1, 1) - date(2020, 1, 1)).days
+    col_float = dataframe[column].astype(float)
+    monthly_data = col_float[first_day:last_day]
     mask_higher = monthly_data > mean
     above_mean = monthly_data[mask_higher]
 
@@ -66,19 +68,25 @@ def above_mean_quantile(dataframe, column, mean):
     return above_mean, above_quantile
 
 
-def below_mean_quantile(dataframe, column, mean):
-    col_float = weather_data[column].astype(float)
-    monthly_data = col_float[0:31]
+def below_mean_quantile(dataframe, column, mean, month):
+    first_day = (date(2020, month, 1) - date(2020, 1, 1)).days
+    last_day = (date(2020, month+1, 1) - date(2020, 1, 1)).days
+    col_float = dataframe[column].astype(float)
+    monthly_data = col_float[first_day:last_day]
     mask_lower = monthly_data < mean
     below_mean = monthly_data[mask_lower]
 
     quant = monthly_data.quantile([0.25])
-    bottom = monthly_data > quant.loc[0.25]
+    bottom = monthly_data < quant.loc[0.25]
     below_quantile = monthly_data[bottom]
 
     return below_mean, below_quantile
 
 
 
-m1, q1 = above_mean_quantile(weather_data, 'Max Temp (°C)', 0)
-print(m1,q1)
+m1, q1 = above_mean_quantile(weather_data, 'Max Temp (°C)', 0, 1)
+print(m1.count(),q1.count())
+
+m2, q2 = below_mean_quantile(weather_data, 'Min Temp (°C)', -4, 1)
+print(m2.count(),q2.count())
+

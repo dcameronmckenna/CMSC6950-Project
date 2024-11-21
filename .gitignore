@@ -1,0 +1,6 @@
+*.tex
+*.sty
+*.log
+*.synctex.gz
+CMSC_6950_Project.tex
+CMSC_6950_Presentation.tex

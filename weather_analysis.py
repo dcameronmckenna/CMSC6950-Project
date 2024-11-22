@@ -5,17 +5,13 @@ weather_data = pd.read_csv('en_climate_daily_NL_8403505_2020_P1D.csv', usecols=r
 
 
 def monthly_mean_temp(dataframe, month):
-    weather_data = dataframe
     num_cols_mean_temp = ['Mean Temp (°C)']
-    weather_data[num_cols_mean_temp] = weather_data[num_cols_mean_temp].astype(float) 
+    weather_data[num_cols_mean_temp] = dataframe[num_cols_mean_temp].astype(float) 
     mean_temp = weather_data[num_cols_mean_temp]
     first_day = (date(2020, month, 1) - date(2020, 1, 1)).days
     last_day = (date(2020, month+1, 1) - date(2020, 1, 1)).days 
     
-    print("first day is", first_day)
-    print("last day is", last_day)
     actualmean = mean_temp[first_day:last_day].mean()
-    print(actualmean)
     return actualmean
 
 def yearly_mean_temp(dataframe):
@@ -27,9 +23,8 @@ def yearly_mean_temp(dataframe):
     return monthly_mean
 
 def monthly_rainy_days(dataframe, month):
-    weather_data = dataframe
     num_cols_rain = ['Total Rain (mm)']
-    weather_data[num_cols_rain] = weather_data[num_cols_rain].astype(float)
+    weather_data[num_cols_rain] = dataframe[num_cols_rain].astype(float)
     total_rain = weather_data[num_cols_rain]
 
 
@@ -41,9 +36,8 @@ def monthly_rainy_days(dataframe, month):
     return rainy_days, rain_amount
 
 def monthly_snowy_days(dataframe, month):
-    weather_data = dataframe
     num_cols_snow = ['Total Snow (cm)']
-    weather_data[num_cols_snow] = weather_data[num_cols_snow].astype(float)
+    weather_data[num_cols_snow] = dataframe[['Total Snow (cm)']].astype(float)
     total_snow = weather_data[num_cols_snow]
 
     first_day = (date(2020, month, 1) - date(2020, 1, 1)).days
@@ -53,40 +47,35 @@ def monthly_snowy_days(dataframe, month):
     snow_amount = total_snow[first_day:last_day].sum()
     return snowy_days, snow_amount
 
-def above_mean_quantile(dataframe, column, mean, month):
+def above_mean(dataframe, column, mean, month):
     first_day = (date(2020, month, 1) - date(2020, 1, 1)).days
     last_day = (date(2020, month+1, 1) - date(2020, 1, 1)).days
     col_float = dataframe[column].astype(float)
     monthly_data = col_float[first_day:last_day]
     mask_higher = monthly_data > mean
     above_mean = monthly_data[mask_higher]
-
-    quant = monthly_data.quantile([0.75])
-    top = monthly_data > quant.loc[0.75]
-    above_quantile = monthly_data[top]
-
-    return above_mean, above_quantile
+    return above_mean
 
 
-def below_mean_quantile(dataframe, column, mean, month):
+def below_mean(dataframe, column, mean, month):
     first_day = (date(2020, month, 1) - date(2020, 1, 1)).days
     last_day = (date(2020, month+1, 1) - date(2020, 1, 1)).days
     col_float = dataframe[column].astype(float)
     monthly_data = col_float[first_day:last_day]
     mask_lower = monthly_data < mean
     below_mean = monthly_data[mask_lower]
-
-    quant = monthly_data.quantile([0.25])
-    bottom = monthly_data < quant.loc[0.25]
-    below_quantile = monthly_data[bottom]
-
-    return below_mean, below_quantile
+    return below_mean
 
 
+#m1, q1 = above_mean(weather_data, 'Mean Temp (°C)', 0, 1)
+#print(m1.count())
 
-m1, q1 = above_mean_quantile(weather_data, 'Max Temp (°C)', 0, 1)
-print(m1.count(),q1.count())
+#m2, q2 = below_mean(weather_data, 'Mean Temp (°C)', -4, 1)
+#print(m2.count())
 
-m2, q2 = below_mean_quantile(weather_data, 'Min Temp (°C)', -4, 1)
-print(m2.count(),q2.count())
+#mean = monthly_mean_temp(weather_data, 1)
+#print(mean)
+
+days, amount = monthly_snowy_days(weather_data, 1)
+print(days, amount)
 

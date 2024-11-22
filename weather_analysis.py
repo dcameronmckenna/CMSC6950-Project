@@ -66,6 +66,15 @@ def below_mean(dataframe, column, mean, month):
     below_mean = monthly_data[mask_lower]
     return below_mean
 
+def high_speed_winds(dataframe, speed, month):
+    first_day = (date(2020, month, 1) - date(2020, 1, 1)).days
+    last_day = (date(2020, month+1, 1) - date(2020, 1, 1)).days
+    col_float = dataframe['Spd of Max Gust (km/h)'].astype(float)
+    monthly_data = col_float[first_day:last_day]
+    mask_higher = monthly_data > speed
+    high_speed = monthly_data[mask_higher]
+    return high_speed
+
 
 #m1, q1 = above_mean(weather_data, 'Mean Temp (°C)', 0, 1)
 #print(m1.count())
@@ -76,6 +85,5 @@ def below_mean(dataframe, column, mean, month):
 #mean = monthly_mean_temp(weather_data, 1)
 #print(mean)
 
-days, amount = monthly_snowy_days(weather_data, 1)
-print(days, amount)
-
+speed = high_speed_winds(weather_data, 90, 1)
+print(speed)

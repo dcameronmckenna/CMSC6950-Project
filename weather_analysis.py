@@ -75,15 +75,4 @@ def high_speed_winds(dataframe, speed, month):
     high_speed = monthly_data[mask_higher]
     return high_speed
 
-
-#m1, q1 = above_mean(weather_data, 'Mean Temp (°C)', 0, 1)
-#print(m1.count())
-
-#m2, q2 = below_mean(weather_data, 'Mean Temp (°C)', -4, 1)
-#print(m2.count())
-
-#mean = monthly_mean_temp(weather_data, 1)
-#print(mean)
-
-speed = high_speed_winds(weather_data, 90, 1)
-print(speed)
+print(below_mean(weather_data, 'Min Temp (°C)', -5, 2))

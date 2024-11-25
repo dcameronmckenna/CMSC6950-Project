@@ -52,7 +52,7 @@ def above_mean(dataframe, column, mean, month):
     last_day = (date(2020, month+1, 1) - date(2020, 1, 1)).days
     col_float = dataframe[column].astype(float)
     monthly_data = col_float[first_day:last_day]
-    mask_higher = monthly_data > mean
+    mask_higher = monthly_data > mean 
     above_mean = monthly_data[mask_higher]
     return above_mean
 
@@ -74,4 +74,3 @@ def high_speed_winds(dataframe, speed, month):
     mask_higher = monthly_data > speed
     high_speed = monthly_data[mask_higher]
     return high_speed
-

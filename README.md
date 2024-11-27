@@ -11,9 +11,11 @@ The data set used recorded several different aspects of the weather on a daily b
 
 All graphs and figures can be found in the file `project_graphs.ipynb` which is inside the folder `project_graphs`. For each graph/figure, we import the data from a CSV file, and plot the first 31 days of each different weather column that we analyzed. Finally, all graphs/figures are saved as PDFs. If you would like to plot the weather data for a different month, you will have to update the slicing on the data set to reflect the days of that month. 
 
+The last line in the file `project_graphs.ipynb` provides a description of the data during the month of January 2020, which can also be useful for finding the mean, standard deviation, minimum, maximum, and quartiles of the data set. 
+
 ## Weather Analysis
 
-Several functions to analyze different aspects of the weather are available for use in the file `weather_analysis`. 
+Several functions to analyze different aspects of the weather are available for use in the file `weather_analysis.py`. 
 - `monthly_mean_temp` takes a dataframe and a month and finds the mean temperature of the daily mean temperature for that month.
 - `yearly_mean_temp` takes a dataframe and collects all of the monthly mean temperatures for the year in a list.
 - `monthly_rainy_days` takes a dataframe and a month and returns the number of rainy days in a given month and the total amount of rain that fell during the month.

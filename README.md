@@ -24,7 +24,7 @@ Several functions to analyze different aspects of the weather are available for 
 - `below_mean` takes a dataframe, a column of that dataframe, a given mean, and a month and returns all of the days in that column where the value of the day is lower than the given mean in a series.
 - `high_speed_winds` takes a dataframe, a given speed, and a month and returns all of the days in the month where the maximum wind gust speed was above the given value for wind speed.
 
-Tests for all of these functions are provided in the file `test_weather_analysis`. 
+Tests for all of these functions are provided in the file `test_weather_analysis.py`. 
 
 ## Links
 
